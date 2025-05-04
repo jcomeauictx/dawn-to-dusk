@@ -1,5 +1,5 @@
 # move everything here to systemd as time permits.
 # sleep from 5 PM to 9 AM
-0 17 * * * /sbin/rtcwake -m disk -s $((60 * 60 * 16))
+0 17 * * * /sbin/rtcwake -m $STORE -s $((60 * 60 * 16))
 # check shell supports arithmetic
 * * * * * logger 16 hours in seconds: $((60 * 60 * 16))
