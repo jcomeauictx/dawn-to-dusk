@@ -3,13 +3,13 @@ SHELL := /bin/bash
 STORE ?= disk
 DAWN ?= 0500
 DUSK ?= 2100
-DAWNHOURS := $(shell echo $$(($(DAWN) / 100)))
-DAWNMINUTES := $(shell echo $$(($(DAWN) % 100)))
-DUSKHOURS := $(shell echo $$(($(DUSK) / 100)))
-DUSKMINUTES := $(shell echo $$(($(DUSK) % 100)))
+DAWNHOURS := $(shell echo $$(($(DAWN:0%=%) / 100)))
+DAWNMINUTES := $(shell echo $$(($(DAWN:0%=%) % 100)))
+DUSKHOURS := $(shell echo $$(($(DUSK:0%=%) / 100)))
+DUSKMINUTES := $(shell echo $$(($(DUSK:0%=%) % 100)))
 STARTMINUTES := $(shell echo $$((($(DUSKHOURS) * 60) + $(DUSKMINUTES))))
 ENDMINUTES := $(shell echo $$(((($(DAWNHOURS) + 24) * 60) + $(DAWNMINUTES))))
-SLEEPTIME := $((shell echo $$((($(ENDMINUTES) - $(STARTMINUTES)) * 60)))
+SLEEPTIME := $(shell echo $$((($(ENDMINUTES) - $(STARTMINUTES)) * 60)))
 ifeq ($(SHOWENV),)
  export STORE DAWN DUSK DUSKHOURS DUSKMINUTES SLEEPTIME
 else
